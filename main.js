@@ -3,8 +3,26 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+let error = document.querySelector('div#modal')
+error.setAttribute('class', 'hidden')
 
+let allHearts = document.querySelectorAll(".like")
 
+function heartClick(e) {
+  let heart = e.target
+  mimicServerCall("bogusUrl", {forceFailure: true})
+  .then(function(message) {
+    heart.innerText = FULL_HEART
+    heart.style.color = "red"
+  })
+  .catch(function(error) {
+    error.className = ""
+  })
+}
+
+for(let icon of allHearts) {
+  icon.addEventListener("click", heartClick)
+}
 
 
 //------------------------------------------------------------------------------
